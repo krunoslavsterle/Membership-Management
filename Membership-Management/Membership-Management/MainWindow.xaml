@@ -3,10 +3,38 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialMenu="clr-namespace:MaterialMenu;assembly=MaterialMenu"
         xmlns:local="clr-namespace:Membership_Management"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" MinHeight="450" MinWidth="800" WindowState="Maximized">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width=".1*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
         
+        <materialMenu:SideMenu HorizontalAlignment="Left" 
+                                x:Name="Menu"
+                                State="Visible"
+                               ButtonBackground="Red"
+                               ButtonHover="Black"
+                               ShadowBackground="Transparent">
+
+            <materialMenu:SideMenu.Menu>
+                <ScrollViewer VerticalScrollBarVisibility="Hidden" Background="Blue">
+                    <StackPanel Orientation="Vertical">
+                        <Border Background="BlueViolet">
+                            <Grid Margin="10">
+                                <TextBox Height="30" BorderThickness="0" Background="Transparent" VerticalContentAlignment="Bottom" FontFamily="Calibri" FontSize="18" Foreground="WhiteSmoke" FontWeight="Bold">Blue Gym.</TextBox>
+                            </Grid>
+                        </Border>
+                        <materialMenu:MenuButton Text="Home"></materialMenu:MenuButton>
+                        <materialMenu:MenuButton Text="Customers"></materialMenu:MenuButton>
+                        <materialMenu:MenuButton Text="Settings"></materialMenu:MenuButton>
+                    </StackPanel>
+                </ScrollViewer>
+            </materialMenu:SideMenu.Menu>
+
+        </materialMenu:SideMenu>
     </Grid>
 </Window>
