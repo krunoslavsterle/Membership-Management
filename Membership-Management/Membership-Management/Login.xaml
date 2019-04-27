@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Login">
 
-    <Grid Background="#f2f2f2">
+    <Grid Background="#43596f">
         <StackPanel Orientation="Vertical" VerticalAlignment="Center">
             <Image Name="imgProjectArrow" 
                    Source="pack://application:,,,/Resources/Images/padlock.png" 

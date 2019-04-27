@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Membership_Management.Infrastructure.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,50 @@ namespace Membership_Management
         public Customers()
         {
             InitializeComponent();
+
+            dgCustomers.ItemsSource = GetCustomersMock();
+        }
+
+        public List<Customer> GetCustomersMock()
+        {
+            var list = new List<Customer>();
+            list.Add(new Customer
+            {
+                Id = 1,
+                RegNumber = 1,
+                RegDate = DateTime.Now.AddDays(-40).ToShortDateString(),
+                Address = "Street 111, 54000 Osijek",
+                FirstName = "John",
+                LastName = "Doe",
+                Email = "mail@test.com",
+                ValidUntil = DateTime.Now.AddDays(10).ToShortDateString()
+            });
+
+            list.Add(new Customer
+            {
+                Id = 2,
+                RegNumber = 2,
+                RegDate = DateTime.Now.AddDays(-40).ToShortDateString(),
+                Address = "Street 131, 54000 Osijek",
+                FirstName = "John",
+                LastName = "Doe 2",
+                Email = "mail@test.com",
+                ValidUntil = DateTime.Now.AddDays(10).ToShortDateString()
+            });
+
+            list.Add(new Customer
+            {
+                Id = 3,
+                RegNumber = 3,
+                RegDate = DateTime.Now.AddDays(-40).ToShortDateString(),
+                Address = "Street 131, 54000 Osijek",
+                FirstName = "John 3",
+                LastName = "Doe 2",
+                Email = "mail@test.com",
+                ValidUntil = DateTime.Now.AddDays(10).ToShortDateString()
+            });
+
+            return list;
         }
     }
 }

@@ -8,7 +8,17 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Customers">
 
-    <Grid Background="White">
-        <TextBlock Text="Customers" FontSize="40"></TextBlock>
+    <Grid Background="#43596f">
+        <DataGrid Name="dgCustomers" AutoGenerateColumns="False" IsReadOnly="True" Margin="20 100 20 20">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Reg Number" Binding="{Binding RegNumber}"></DataGridTextColumn>
+                <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Address" Binding="{Binding Address}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Registrated" Binding="{Binding RegDate}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Expireing On" Binding="{Binding ValidUntil}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>
