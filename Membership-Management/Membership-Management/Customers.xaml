@@ -9,7 +9,7 @@
       Title="Customers">
 
     <Grid Background="#43596f">
-        <DataGrid Name="dgCustomers" AutoGenerateColumns="False" IsReadOnly="True" Margin="20 100 20 20">
+        <DataGrid Name="dgCustomers" AutoGenerateColumns="False" Margin="20 100 20 20" CanUserAddRows="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Reg Number" Binding="{Binding RegNumber}"></DataGridTextColumn>
                 <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}"></DataGridTextColumn>

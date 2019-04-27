@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Membership_Management.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,17 @@ namespace Membership_Management
     /// </summary>
     public partial class Settings : Page
     {
+        private ImportExportService importExportService = new ImportExportService();
+
         public Settings()
         {
             InitializeComponent();
+        }
+
+        private void BtnImportOldJSON_Click(object sender, RoutedEventArgs e)
+        {
+            var filePath = tbxFilePath.Text;
+            importExportService.ImportOldJSON(filePath);
         }
     }
 }

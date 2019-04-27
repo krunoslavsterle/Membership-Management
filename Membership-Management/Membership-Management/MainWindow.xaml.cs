@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Membership_Management.Services;
+using System;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Navigation;
@@ -10,9 +11,12 @@ namespace Membership_Management
     /// </summary>
     public partial class MainWindow : Window
     {
+        private DatabaseService databaseService = new DatabaseService();
+
         public MainWindow()
         {
             InitializeComponent();
+            databaseService.ValidateDatabaseExist();
 
             MainFrame.NavigationService.Navigating += NavigationService_Navigating;
             MainFrame.Navigate(new Uri("Login.xaml", UriKind.Relative));
