@@ -5,14 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Membership_Management"
         mc:Ignorable="d"
-        Title="MainWindow" MinHeight="450" MinWidth="800" WindowState="Maximized">
+        Title="Membership Manager" MinHeight="450" MinWidth="800" WindowState="Maximized">
     <Grid>
         <DockPanel>
-            <DockPanel DockPanel.Dock="Left" x:Name="dpMenu" HorizontalAlignment="Left" Width="200" Background="Green">
-                <Button DockPanel.Dock="Top" FontSize="22" Height="30" Content="Home"></Button>
-                <Button DockPanel.Dock="Top" FontSize="22" Height="30" Content="Home"></Button>
-                <Button DockPanel.Dock="Top" FontSize="22" Height="30" Content="Home"></Button>
-                <Button x:Name="btnLock" DockPanel.Dock="Bottom" FontSize="22" Height="30" Content="Lock" VerticalAlignment="Bottom" Click="BtnLock_Click"></Button>
+            <DockPanel DockPanel.Dock="Left" x:Name="dpMenu" HorizontalAlignment="Left" Background="#383838">
+                <Button x:Name="btnHome" DockPanel.Dock="Top" Height="60" Width="60" Click="BtnHome_Click">
+                    <Image Height="30" Width="30" Source="pack://application:,,,/Resources/Images/home-white.png" />
+                </Button>
+                <Button x:Name="btnCustomers" DockPanel.Dock="Top" Height="60" Width="60" Click="BtnCustomers_Click">
+                    <Image Height="30" Width="30" Source="pack://application:,,,/Resources/Images/users-white.png" />
+                </Button>
+                <Button x:Name="btnSettings" DockPanel.Dock="Top" Height="60" Width="60" Click="BtnSettings_Click">
+                    <Image Height="30" Width="30" Source="pack://application:,,,/Resources/Images/gears-white.png" />
+                </Button>
+                <Button x:Name="btnLock" DockPanel.Dock="Bottom" Height="60" Width="60" VerticalAlignment="Bottom" Click="BtnLock_Click">
+                    <Image Height="30" Width="30" Source="pack://application:,,,/Resources/Images/lock-white.png" />
+                </Button>
             </DockPanel>
             <Frame DockPanel.Dock="Left" x:Name="MainFrame"
                NavigationUIVisibility="Hidden"></Frame>
