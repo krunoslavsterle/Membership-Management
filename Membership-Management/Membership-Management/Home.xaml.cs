@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using Membership_Management.Services;
+using System;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Membership_Management
 {
@@ -20,9 +9,17 @@ namespace Membership_Management
     /// </summary>
     public partial class Home : Page
     {
+        private DatabaseService databaseService = new DatabaseService();
+
         public Home()
         {
             InitializeComponent();
+            var now = DateTime.Now;
+
+            tbTotalMembers.Text = databaseService.GetCustomersCount(null).ToString();
+            tbActiveMembers.Text = databaseService.GetCustomersCount(p => p.ValidUntil > DateTime.Now).ToString();
+            tbExpireingMembers.Text = databaseService.GetCustomersCount(p => p.ValidUntil > DateTime.Now.AddDays(-5) && p.ValidUntil <= DateTime.Now).ToString();
+            tbNewMembers.Text = databaseService.GetCustomersCount(p => p.RegDate >= new DateTime(now.Year, now.Month, 1, 0, 0, 0)).ToString();
         }
     }
 }

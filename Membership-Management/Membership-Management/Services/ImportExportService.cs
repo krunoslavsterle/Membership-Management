@@ -30,6 +30,7 @@ namespace Membership_Management.Services
             foreach (var old in oldCustomers)
                 customers.Add(MapOldToNew(old));
 
+            databaseService.DeleteAllCustomers();
             databaseService.InsertCustomersBulk(customers);
         }
 

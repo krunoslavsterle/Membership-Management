@@ -1,4 +1,6 @@
-﻿namespace Membership_Management.Infrastructure.Models
+﻿using System;
+
+namespace Membership_Management.Infrastructure.Models
 {
     public class OldCustomer
     {
@@ -8,8 +10,8 @@
         public string prezime { get; set; }
         public string mjesto { get; set; }
         public string adresa { get; set; }
-        public string datum_registracije { get; set; }
-        public string vrijeme_do { get; set; }
+        public DateTime datum_registracije { get; set; }
+        public DateTime vrijeme_do { get; set; }
         public string mail { get; set; }
     }
 }

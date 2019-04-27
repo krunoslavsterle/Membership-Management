@@ -2,6 +2,7 @@
 using Membership_Management.Infrastructure.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Membership_Management.Services
 {
@@ -41,6 +42,19 @@ namespace Membership_Management.Services
             {
                 var customerCollection = db.GetCollection<Customer>();
                 return customerCollection.FindAll();
+            }
+        }
+
+        public int GetCustomersCount(Expression<Func<Customer, bool>> predicate)
+        {
+            using (var db = new LiteDatabase($"{AppDomain.CurrentDomain.BaseDirectory}{DB_NAME}"))
+            {
+                var customerCollection = db.GetCollection<Customer>();
+
+                if (predicate == null)
+                    return customerCollection.Count();
+
+                return customerCollection.Count(predicate);
             }
         }
     }

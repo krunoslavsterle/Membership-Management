@@ -13,8 +13,8 @@ namespace Membership_Management.Infrastructure.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }
-        public string RegDate { get; set; }
-        public string ValidUntil { get; set; }
+        public DateTime RegDate { get; set; }
+        public DateTime ValidUntil { get; set; }
         public string Email { get; set; }
     }
 }
