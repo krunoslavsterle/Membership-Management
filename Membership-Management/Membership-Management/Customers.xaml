@@ -6,18 +6,88 @@
       xmlns:local="clr-namespace:Membership_Management"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      Background="#373943"
       Title="Customers">
 
-    <Grid Background="#43596f">
-        <DataGrid Name="dgCustomers" AutoGenerateColumns="False" Margin="20 100 20 20" CanUserAddRows="True">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="auto" MinWidth="500"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Name="gridEditCustomer" Grid.Row="1" Grid.Column="1" Visibility="Collapsed" Background="#40424c">
+            <StackPanel Orientation="Vertical" Margin="15">
+                <TextBlock Foreground="#f6a821" Margin="6 0 0 30" FontWeight="Bold" FontSize="25" HorizontalAlignment="Center">Edit Customer</TextBlock>
+                
+                <TextBlock Foreground="White" Margin="6 0 0 2" FontWeight="Bold" FontSize="18">First Name</TextBlock>
+                <TextBox Name="tbxEditFirstName" Foreground="White" FontSize="18" Background="#494b54" BorderBrush="#494b54" Padding="6"></TextBox>
+
+                <TextBlock Margin="6 10 0 2" Foreground="White" FontWeight="Bold" FontSize="18">Last Name</TextBlock>
+                <TextBox Name="tbxEditLastName" Foreground="White" FontSize="18" Background="#494b54" BorderBrush="#494b54" Padding="6"></TextBox>
+
+                <TextBlock Margin="6 10 0 2" Foreground="White" FontWeight="Bold" FontSize="18">Address</TextBlock>
+                <TextBox Name="tbxEditAddress" Foreground="White" FontSize="18" Background="#494b54" BorderBrush="#494b54" Padding="6"></TextBox>
+
+                <TextBlock Margin="6 10 0 2" Foreground="White" FontWeight="Bold" FontSize="18">Email</TextBlock>
+                <TextBox Name="tbxEditEmail" Foreground="White" FontSize="18" Background="#494b54" BorderBrush="#494b54" Padding="6"></TextBox>
+
+                <TextBlock Margin="6 10 0 2" Foreground="White" FontWeight="Bold" FontSize="18">Subscription Expiring</TextBlock>
+                <DatePicker Name="dPickerEditExpiring" BorderBrush="#494b54" Padding="0" SelectedDateFormat="Short">
+                    <DatePicker.Resources>
+                        <Style TargetType="{x:Type DatePickerTextBox}">
+                            <Setter Property="Control.Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <TextBox x:Name="PART_TextBox" Foreground="White" FontSize="18" Background="#494b54" BorderBrush="#494b54" Padding="6" Text="{Binding Path=SelectedDate, RelativeSource={RelativeSource AncestorType={x:Type DatePicker}}, StringFormat=d}" />
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DatePicker.Resources>
+                </DatePicker>
+                
+                <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                    <Button Name="btnEditSave" Padding="15 10 15 10" Background="#20c05c" Foreground="White" FontSize="18" FontWeight="Bold" BorderBrush="Transparent" Click="BtnEditSave_Click">Save</Button>
+                    <Button Padding="15 10 15 10" Background="#ed4949" Foreground="White" FontSize="18" FontWeight="Bold" BorderBrush="Transparent">Cancel</Button>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <DataGrid Name="dgCustomers" Grid.ColumnSpan="3" Grid.RowSpan="3" AutoGenerateColumns="False" Margin="20 100 20 20" Width="auto" CanUserAddRows="True" IsReadOnly="False" CanUserDeleteRows="True" Visibility="Visible">          
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Reg Number" Binding="{Binding RegNumber}"></DataGridTextColumn>
-                <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}"></DataGridTextColumn>
+                
+                <DataGridTemplateColumn Header="Actions">
+                    <!--<DataGridTemplateColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="Background" Value="Aquamarine"></Setter>
+                            <Setter Property="Foreground" Value="Black"></Setter>
+                            <Setter Property="FontSize" Value="18"></Setter>
+                            <Setter Property="Padding" Value="10"></Setter>
+                        </Style>
+                    </DataGridTemplateColumn.HeaderStyle>-->
+
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Name="btnEdit" Content="Edit" Click="BtnEdit_Click"/>
+                                <Button Name="btnDelete" Content="Delete" Click="BtnDelete_Click"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+                <DataGridTextColumn Header="Reg Number" Binding="{Binding NotifyOnTargetUpdated=True, Path=RegNumber}"></DataGridTextColumn>
+                <DataGridTextColumn Header="First Name" Binding="{Binding FirstName, UpdateSourceTrigger=Explicit}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Address" Binding="{Binding Address}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Registrated" Binding="{Binding RegDate}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Expireing On" Binding="{Binding ValidUntil}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Email" Binding="{Binding Email}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Expireing On" Binding="{Binding ValidUntil, StringFormat=d}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" MinWidth="200"></DataGridTextColumn>                            
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

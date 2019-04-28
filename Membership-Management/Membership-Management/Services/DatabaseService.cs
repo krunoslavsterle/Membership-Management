@@ -57,5 +57,23 @@ namespace Membership_Management.Services
                 return customerCollection.Count(predicate);
             }
         }
+
+        public void DeleteCustomer(int id)
+        {
+            using (var db = new LiteDatabase($"{AppDomain.CurrentDomain.BaseDirectory}{DB_NAME}"))
+            {
+                var customerCollection = db.GetCollection<Customer>();
+                customerCollection.Delete(p => p.Id == id);
+            }
+        }
+
+        public void UpdateCustomer(Customer customer)
+        {
+            using (var db = new LiteDatabase($"{AppDomain.CurrentDomain.BaseDirectory}{DB_NAME}"))
+            {
+                var customerCollection = db.GetCollection<Customer>();
+                customerCollection.Update(customer);
+            }
+        }
     }
 }

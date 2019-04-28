@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Home"
-      Background="#43596f">
+      Background="#373943">
 
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
@@ -24,7 +24,7 @@
         </Grid.RowDefinitions>
 
         <Border BorderBrush="Transparent" BorderThickness="10">
-            <Grid Background="#404150" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Grid Background="#3c3e48" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <StackPanel Orientation="Vertical">
                     <TextBlock FontSize="24" Padding="30 30 30 0" Foreground="#6f7080" HorizontalAlignment="Center">TOTAL MEMBERS</TextBlock>
                     <TextBlock x:Name="tbTotalMembers" FontSize="33" FontWeight="Bold" Padding="0 0 0 30" Foreground="#3a6d9e" HorizontalAlignment="Center">2754</TextBlock>
