@@ -143,6 +143,9 @@
     <Resource Include="Resources\Images\lock-white.png" />
     <Resource Include="Resources\Images\users-white.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\Images\pencil.png" />
+    <Resource Include="Resources\Images\bin.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
