@@ -21,6 +21,7 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
+        <!-- EDIT/CREATE CUSTOMER GRID -->
         <Grid Name="gridEditCustomer" Grid.Row="1" Grid.Column="1" Visibility="Collapsed" Background="#40424c">
             <StackPanel Orientation="Vertical" Margin="15">
                 <TextBlock Foreground="#f6a821" Margin="6 0 0 30" FontWeight="Bold" FontSize="25" HorizontalAlignment="Center">Edit Customer</TextBlock>
@@ -38,7 +39,7 @@
                 <TextBox Name="tbxEditEmail" Foreground="White" FontSize="18" Background="#494b54" BorderBrush="#494b54" Padding="6"></TextBox>
 
                 <TextBlock Margin="6 10 0 2" Foreground="White" FontWeight="Bold" FontSize="18">Subscription Expiring</TextBlock>
-                <DatePicker Name="dPickerEditExpiring" BorderBrush="#494b54" Padding="0" SelectedDateFormat="Short">
+                <DatePicker Name="dPickerEditExpiring" BorderBrush="#494b54" Padding="0" SelectedDateFormat="Short" IsTodayHighlighted="True">
                     <DatePicker.Resources>
                         <Style TargetType="{x:Type DatePickerTextBox}">
                             <Setter Property="Control.Template">
@@ -54,11 +55,13 @@
                 
                 <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
                     <Button Name="btnEditSave" Padding="15 10 15 10" Background="#20c05c" Foreground="White" FontSize="18" FontWeight="Bold" BorderBrush="Transparent" Click="BtnEditSave_Click">Save</Button>
-                    <Button Padding="15 10 15 10" Background="#ed4949" Foreground="White" FontSize="18" FontWeight="Bold" BorderBrush="Transparent">Cancel</Button>
+                    <Button Name="btnEditCancel" Padding="15 10 15 10" Background="#ed4949" Foreground="White" FontSize="18" FontWeight="Bold" BorderBrush="Transparent" Click="BtnEditCancel_Click">Cancel</Button>
                 </StackPanel>
             </StackPanel>
         </Grid>
-        <DataGrid Name="dgCustomers" Grid.ColumnSpan="3" Grid.RowSpan="3" AutoGenerateColumns="False" Margin="20 100 20 20" Width="auto" CanUserAddRows="True" IsReadOnly="False" CanUserDeleteRows="True" Visibility="Visible">          
+        
+        <!-- CUSTOMERS DATA GRID -->
+        <DataGrid Name="dgCustomers" Grid.ColumnSpan="3" Grid.RowSpan="3" AutoGenerateColumns="False" Margin="20 100 20 20" Width="auto" CanUserAddRows="False" IsReadOnly="True" CanUserDeleteRows="True" Visibility="Visible">          
             <DataGrid.Columns>
                 
                 <DataGridTemplateColumn Header="Actions">

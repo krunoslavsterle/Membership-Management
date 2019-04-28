@@ -83,5 +83,13 @@ namespace Membership_Management
             dgCustomers.Visibility = Visibility.Visible;
             gridEditCustomer.Visibility = Visibility.Collapsed;
         }
+
+        private void BtnEditCancel_Click(object sender, RoutedEventArgs e)
+        {
+            editCustomer = null;
+
+            dgCustomers.Visibility = Visibility.Visible;
+            gridEditCustomer.Visibility = Visibility.Collapsed;
+        }
     }
 }
