@@ -45,6 +45,19 @@ namespace Membership_Management.Services
             }
         }
 
+        public IEnumerable<Customer> FindCustomers(Expression<Func<Customer, bool>> predicate)
+        {
+            using (var db = new LiteDatabase($"{AppDomain.CurrentDomain.BaseDirectory}{DB_NAME}"))
+            {
+                var customerCollection = db.GetCollection<Customer>();
+
+                if (predicate == null)
+                    return customerCollection.FindAll();
+
+                return customerCollection.Find(predicate);
+            }
+        }
+
         public int GetCustomersCount(Expression<Func<Customer, bool>> predicate)
         {
             using (var db = new LiteDatabase($"{AppDomain.CurrentDomain.BaseDirectory}{DB_NAME}"))

@@ -19,16 +19,25 @@ namespace Membership_Management
             Edit
         }
 
+        private enum FilterBy
+        {
+            All,
+            Active,
+            Inactive,
+            New
+        }
+
         private DatabaseService databaseService = new DatabaseService();
-        private ObservableCollection<Customer> customers;
+        private ObservableCollection<Customer> customers = new ObservableCollection<Customer>();
         private Customer editCustomer = null;
 
         public Customers()
         {
             InitializeComponent();
 
-            customers = new ObservableCollection<Customer>(databaseService.GetAllCustomers().ToList());
             dgCustomers.ItemsSource = customers;
+            cbxFilterBy.ItemsSource = Enum.GetValues(typeof(FilterBy));
+            cbxFilterBy.SelectedItem = FilterBy.All;
         }
         
         // Events
@@ -97,6 +106,29 @@ namespace Membership_Management
                 ApplySearchFilter();
         }
 
+        private void CbxFilterBy_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedEnum = (FilterBy)Enum.Parse(typeof(FilterBy), e.AddedItems[0].ToString());
+            switch (selectedEnum)
+            {
+                default:
+                case FilterBy.All:
+                    customers = new ObservableCollection<Customer>(databaseService.GetAllCustomers().ToList());
+                    break;
+                case FilterBy.Active:
+                    customers = new ObservableCollection<Customer>(databaseService.FindCustomers(p => p.ValidUntil > DateTime.Now).ToList());
+                    break;
+                case FilterBy.Inactive:
+                    customers = new ObservableCollection<Customer>(databaseService.FindCustomers(p => p.ValidUntil <= DateTime.Now).ToList());
+                    break;
+                case FilterBy.New:
+                    var now = DateTime.Now;
+                    customers = new ObservableCollection<Customer>(databaseService.FindCustomers(p => p.RegDate >= new DateTime(now.Year, now.Month, 1, 0, 0, 0)).ToList());
+                    break;
+            }
+
+            dgCustomers.ItemsSource = customers;
+        }
 
         // Methods
         //
@@ -152,6 +184,6 @@ namespace Membership_Management
                     gridEditCustomer.Visibility = Visibility.Visible;
                     break;
             }
-        }
+        }        
     }
 }
