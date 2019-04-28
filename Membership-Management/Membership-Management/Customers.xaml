@@ -24,7 +24,7 @@
         <!-- EDIT/CREATE CUSTOMER GRID -->
         <Grid Name="gridEditCustomer" Grid.Row="1" Grid.Column="1" Visibility="Collapsed" Background="#40424c">
             <StackPanel Orientation="Vertical" Margin="15">
-                <TextBlock Foreground="#f6a821" Margin="6 0 0 30" FontWeight="Bold" FontSize="25" HorizontalAlignment="Center">Edit Customer</TextBlock>
+                <TextBlock Name="tbEditTitle" Foreground="#f6a821" Margin="6 0 0 30" FontWeight="Bold" FontSize="25" HorizontalAlignment="Center">Edit Customer</TextBlock>
                 
                 <TextBlock Foreground="White" Margin="6 0 0 2" FontWeight="Bold" FontSize="18">First Name</TextBlock>
                 <TextBox Name="tbxEditFirstName" Foreground="White" FontSize="18" Background="#494b54" BorderBrush="#494b54" Padding="6"></TextBox>
@@ -61,11 +61,23 @@
         </Grid>
         
         <!-- CUSTOMERS DATA GRID -->
-        <DataGrid Name="dgCustomers" Grid.ColumnSpan="3" Grid.RowSpan="3" AutoGenerateColumns="False" Margin="20 100 20 20" Width="auto" CanUserAddRows="False" IsReadOnly="True" CanUserDeleteRows="True" Visibility="Visible">          
-            <DataGrid.Columns>
-                
-                <DataGridTemplateColumn Header="Actions">
-                    <!--<DataGridTemplateColumn.HeaderStyle>
+        <Grid Name="gridCustomers" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="20 50 20 20">
+            <DockPanel>
+                <Grid DockPanel.Dock="Top" Margin="0 0 0 10">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Name="tbxSearch" HorizontalAlignment="Left" Padding="10" FontSize="18" Width="400" PreviewKeyUp="TbxSearch_PreviewKeyUp"></TextBox>
+                        <Button Name="btnSearch" DockPanel.Dock="Top" HorizontalAlignment="Left" Padding="15 10 15 10" Background="#20c05c" Foreground="White" FontSize="18" FontWeight="Bold" BorderBrush="Transparent" Click="BtnSearch_Click">Find</Button>
+                    </StackPanel>
+                    
+                    <Button Name="btnAddNew" DockPanel.Dock="Top" HorizontalAlignment="Right" Padding="15 10 15 10" Background="#20c05c" Foreground="White" FontSize="18" FontWeight="Bold" BorderBrush="Transparent" Click="BtnAddNew_Click">Add New</Button>
+                </Grid>
+                    
+                <DataGrid DockPanel.Dock="Top" Name="dgCustomers" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" CanUserDeleteRows="True"
+                          VirtualizingStackPanel.VirtualizationMode="Recycling"
+          VirtualizingStackPanel.IsVirtualizing="True">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Actions">
+                        <!--<DataGridTemplateColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="Background" Value="Aquamarine"></Setter>
                             <Setter Property="Foreground" Value="Black"></Setter>
@@ -74,24 +86,27 @@
                         </Style>
                     </DataGridTemplateColumn.HeaderStyle>-->
 
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Button Name="btnEdit" Content="Edit" Click="BtnEdit_Click"/>
-                                <Button Name="btnDelete" Content="Delete" Click="BtnDelete_Click"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                
-                <DataGridTextColumn Header="Reg Number" Binding="{Binding NotifyOnTargetUpdated=True, Path=RegNumber}"></DataGridTextColumn>
-                <DataGridTextColumn Header="First Name" Binding="{Binding FirstName, UpdateSourceTrigger=Explicit}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Address" Binding="{Binding Address}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Registrated" Binding="{Binding RegDate}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Expireing On" Binding="{Binding ValidUntil, StringFormat=d}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Email" Binding="{Binding Email}" MinWidth="200"></DataGridTextColumn>                            
-            </DataGrid.Columns>
-        </DataGrid>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Name="btnEdit" Content="Edit" Click="BtnEdit_Click"/>
+                                    <Button Name="btnDelete" Content="Delete" Click="BtnDelete_Click"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTextColumn Header="Reg Number" Binding="{Binding NotifyOnTargetUpdated=True, Path=RegNumber}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="First Name" Binding="{Binding FirstName, UpdateSourceTrigger=Explicit}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Address" Binding="{Binding Address}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Registrated" Binding="{Binding RegDate}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Expireing On" Binding="{Binding ValidUntil, StringFormat=d}"></DataGridTextColumn>
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" MinWidth="200"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            </DockPanel>
+        </Grid>
+        
     </Grid>
 </Page>

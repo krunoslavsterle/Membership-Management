@@ -75,5 +75,15 @@ namespace Membership_Management.Services
                 customerCollection.Update(customer);
             }
         }
+
+        public void InsertCustomer(Customer customer)
+        {
+            customer.RegDate = DateTime.Now;
+            using (var db = new LiteDatabase($"{AppDomain.CurrentDomain.BaseDirectory}{DB_NAME}"))
+            {
+                var customerCollection = db.GetCollection<Customer>();
+                var val = customerCollection.Insert(customer);
+            }
+        }
     }
 }

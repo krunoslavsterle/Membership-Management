@@ -1,21 +1,24 @@
 ﻿using Membership_Management.Infrastructure.Models;
 using Membership_Management.Services;
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using System.Collections.ObjectModel;
-using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
 
 namespace Membership_Management
 {
-    /// <summary>
-    /// Interaction logic for Customers.xaml
-    /// </summary>
     public partial class Customers : Page
     {
+        private enum SubView
+        {
+            Customers,
+            Add,
+            Edit
+        }
+
         private DatabaseService databaseService = new DatabaseService();
         private ObservableCollection<Customer> customers;
         private Customer editCustomer = null;
@@ -24,18 +27,12 @@ namespace Membership_Management
         {
             InitializeComponent();
 
-            var customerList = databaseService.GetAllCustomers().ToList();
-            customers = new ObservableCollection<Customer>(customerList);
-
+            customers = new ObservableCollection<Customer>(databaseService.GetAllCustomers().ToList());
             dgCustomers.ItemsSource = customers;
-            dgCustomers.CellEditEnding += DgCustomers_CellEditEnding;
         }
-
-        private void DgCustomers_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
-        {
-            var preUpdatedItem = e.Row.Item as Customer;
-            var updatedItem = customers.First(p => p.Id == preUpdatedItem.Id);
-        }
+        
+        // Events
+        //
 
         private void BtnDelete_Click(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -45,7 +42,6 @@ namespace Membership_Management
             {
                 databaseService.DeleteCustomer(customer.Id);
                 customers.Remove(customer);
-                //dgCustomers.Items.Refresh();
             }
         }
 
@@ -53,15 +49,75 @@ namespace Membership_Management
         {
             editCustomer = ((FrameworkElement)sender).DataContext as Customer;
 
-            dgCustomers.Visibility = Visibility.Collapsed;
-            gridEditCustomer.Visibility = Visibility.Visible;
+            SetEditCustomerBindings();
+            SwitchSubView(SubView.Edit);
+        }
 
+        private void BtnEditSave_Click(object sender, RoutedEventArgs e)
+        {
+            if (customers.Count(p => p.Id == editCustomer.Id) > 0)
+                databaseService.UpdateCustomer(editCustomer);
+            else
+            {
+                databaseService.InsertCustomer(editCustomer);
+                customers.Add(editCustomer);
+            }
+
+            editCustomer = null;
+            SwitchSubView(SubView.Customers);
+        }
+
+        private void BtnEditCancel_Click(object sender, RoutedEventArgs e)
+        {
+            editCustomer = null;
+            SwitchSubView(SubView.Customers);
+        }
+
+        private void BtnAddNew_Click(object sender, RoutedEventArgs e)
+        {
+            editCustomer = new Customer
+            {
+                Id = customers.OrderByDescending(p => p.Id).First().Id + 1,
+                RegNumber = customers.OrderByDescending(p => p.RegNumber).First().RegNumber + 1,
+                ValidUntil = DateTime.Now
+            };
+
+            SetEditCustomerBindings();
+            SwitchSubView(SubView.Add);
+        }
+
+        private void BtnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            ApplySearchFilter();
+        }
+
+        private void TbxSearch_PreviewKeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                ApplySearchFilter();
+        }
+
+
+        // Methods
+        //
+
+        private void ApplySearchFilter()
+        {
+            var customFilter = new Predicate<object>(item => (((Customer)item).FirstName != null && ((Customer)item).FirstName.StartsWith(tbxSearch.Text, StringComparison.CurrentCultureIgnoreCase))
+                                                                || ((Customer)item).LastName != null && ((Customer)item).LastName.StartsWith(tbxSearch.Text, StringComparison.CurrentCultureIgnoreCase)
+                                                                || ((Customer)item).Email != null && ((Customer)item).Email.StartsWith(tbxSearch.Text, StringComparison.CurrentCultureIgnoreCase)
+                                                                || ((Customer)item).RegNumber.ToString() == tbxSearch.Text);
+            dgCustomers.Items.Filter = customFilter;
+        }
+
+        private void SetEditCustomerBindings()
+        {
             var firstNameBinding = new Binding(nameof(Customer.FirstName));
             var lastNameBinding = new Binding(nameof(Customer.LastName));
             var emailBinding = new Binding(nameof(Customer.Email));
             var addressBinding = new Binding(nameof(Customer.Address));
             var validUntilBinding = new Binding(nameof(Customer.ValidUntil));
-            
+
             firstNameBinding.Source = editCustomer;
             lastNameBinding.Source = editCustomer;
             emailBinding.Source = editCustomer;
@@ -75,21 +131,27 @@ namespace Membership_Management
             dPickerEditExpiring.SetBinding(DatePicker.SelectedDateProperty, validUntilBinding);
         }
 
-        private void BtnEditSave_Click(object sender, RoutedEventArgs e)
+        private void SwitchSubView(SubView subView)
         {
-            databaseService.UpdateCustomer(editCustomer);
-            editCustomer = null;
+            switch (subView)
+            {
+                default:
+                case SubView.Customers:
+                    gridCustomers.Visibility = Visibility.Visible;
+                    gridEditCustomer.Visibility = Visibility.Collapsed;
+                    break;
 
-            dgCustomers.Visibility = Visibility.Visible;
-            gridEditCustomer.Visibility = Visibility.Collapsed;
-        }
-
-        private void BtnEditCancel_Click(object sender, RoutedEventArgs e)
-        {
-            editCustomer = null;
-
-            dgCustomers.Visibility = Visibility.Visible;
-            gridEditCustomer.Visibility = Visibility.Collapsed;
+                case SubView.Add:
+                    tbEditTitle.Text = "Create Customer";
+                    gridCustomers.Visibility = Visibility.Collapsed;
+                    gridEditCustomer.Visibility = Visibility.Visible;
+                    break;
+                case SubView.Edit:
+                    tbEditTitle.Text = "Edit Customer";
+                    gridCustomers.Visibility = Visibility.Collapsed;
+                    gridEditCustomer.Visibility = Visibility.Visible;
+                    break;
+            }
         }
     }
 }
