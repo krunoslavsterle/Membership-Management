@@ -33,13 +33,12 @@ namespace Membership_Management
 
         private void HandleMenuButtons(string pageUri)
         {
-            var inactiveBrush = new SolidColorBrush(Color.FromRgb(74, 74, 74));
-            var activeBrush = new SolidColorBrush(Color.FromRgb(28, 135, 219));
+            var activeBrush = new SolidColorBrush(Color.FromRgb(15, 145, 200));
 
-            btnCustomers.Background = 
-                btnHome.Background = 
-                btnLock.Background = 
-                btnSettings.Background = inactiveBrush;
+            btnCustomers.Background =
+                btnHome.Background =
+                btnLock.Background =
+                btnSettings.Background = Brushes.Transparent;
 
             if (pageUri == "Home.xaml")
                 btnHome.Background = activeBrush;
