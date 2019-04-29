@@ -10,54 +10,54 @@
       Background="#373943">
 
     <Grid Margin="10">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <Border BorderBrush="Transparent" BorderThickness="10">
+                    <Grid Background="#40424c" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="300">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock FontSize="24" Padding="30 30 30 0" Foreground="#6f7080" HorizontalAlignment="Center">TOTAL MEMBERS</TextBlock>
+                            <TextBlock x:Name="tbTotalMembers" FontSize="33" FontWeight="Bold" Padding="0 10 0 30" Foreground="#3a6d9e" HorizontalAlignment="Center">2754</TextBlock>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Grid.Column="1" BorderBrush="Transparent" BorderThickness="10">
+                    <Grid Background="#40424c" VerticalAlignment="Center" HorizontalAlignment="Center"  MinWidth="300">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock FontSize="24" Foreground="#6f7080" Padding="30 30 30 0" HorizontalAlignment="Center">ACTIVE MEMBERS</TextBlock>
+                            <TextBlock x:Name="tbActiveMembers" FontSize="33" Padding="0 10 0 30" Foreground="#24c4a6" FontWeight="Bold" HorizontalAlignment="Center">2754</TextBlock>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Border Grid.Column="2" BorderBrush="Transparent" BorderThickness="10">
+                    <Grid Background="#40424c" VerticalAlignment="Center" HorizontalAlignment="Center"  MinWidth="300">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock FontSize="24" Foreground="#6f7080" Padding="30 30 30 0" HorizontalAlignment="Center">EXPIRING MEMBERS</TextBlock>
+                            <TextBlock x:Name="tbExpireingMembers" FontSize="33" Padding="0 10 0 30" Foreground="#ff5590" FontWeight="Bold" HorizontalAlignment="Center">2754</TextBlock>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+                <Border Grid.Column="3" BorderBrush="Transparent" BorderThickness="10">
+                    <Grid Background="#40424c" VerticalAlignment="Center" HorizontalAlignment="Center"  MinWidth="300">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock FontSize="24" Foreground="#6f7080" Padding="30 30 30 0" HorizontalAlignment="Center">NEW MEMBERS</TextBlock>
+                            <TextBlock x:Name="tbNewMembers" FontSize="33" Padding="0 10 0 30" Foreground="#b47eff" FontWeight="Bold" HorizontalAlignment="Center">2754</TextBlock>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </StackPanel>
+        </StackPanel>
+                    
 
-        <Border BorderBrush="Transparent" BorderThickness="10">
-            <Grid Background="#3c3e48" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <StackPanel Orientation="Vertical">
-                    <TextBlock FontSize="24" Padding="30 30 30 0" Foreground="#6f7080" HorizontalAlignment="Center">TOTAL MEMBERS</TextBlock>
-                    <TextBlock x:Name="tbTotalMembers" FontSize="33" FontWeight="Bold" Padding="0 0 0 30" Foreground="#3a6d9e" HorizontalAlignment="Center">2754</TextBlock>
-                </StackPanel>
-            </Grid>
-        </Border>
+        
 
-        <Border Grid.Column="1" BorderBrush="Transparent" BorderThickness="10">
-            <Grid Background="#404150" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <StackPanel Orientation="Vertical">
-                    <TextBlock FontSize="24" Foreground="#6f7080" Padding="30 30 30 0" HorizontalAlignment="Center">ACTIVE MEMBERS</TextBlock>
-                    <TextBlock x:Name="tbActiveMembers" FontSize="33" Padding="0 0 0 30" Foreground="#24c4a6" FontWeight="Bold" HorizontalAlignment="Center">2754</TextBlock>
-                </StackPanel>
-            </Grid>
-        </Border>
+        
 
-        <Border Grid.Column="2" BorderBrush="Transparent" BorderThickness="10">
-            <Grid Background="#404150" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <StackPanel Orientation="Vertical">
-                    <TextBlock FontSize="24" Foreground="#6f7080" Padding="30 30 30 0" HorizontalAlignment="Center">EXPIRING MEMBERS</TextBlock>
-                    <TextBlock x:Name="tbExpireingMembers" FontSize="33" Padding="0 0 0 30" Foreground="#ff5590" FontWeight="Bold" HorizontalAlignment="Center">2754</TextBlock>
-                </StackPanel>
-            </Grid>
-        </Border>
+        
 
-        <Border Grid.Column="3" BorderBrush="Transparent" BorderThickness="10">
-            <Grid Background="#404150" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <StackPanel Orientation="Vertical">
-                    <TextBlock FontSize="24" Foreground="#6f7080" Padding="30 30 30 0" HorizontalAlignment="Center">NEW MEMBERS</TextBlock>
-                    <TextBlock x:Name="tbNewMembers" FontSize="33" Padding="0 0 0 30" Foreground="#b47eff" FontWeight="Bold" HorizontalAlignment="Center">2754</TextBlock>
-                </StackPanel>
-            </Grid>
-        </Border>
+        
 
     </Grid>
 </Page>
