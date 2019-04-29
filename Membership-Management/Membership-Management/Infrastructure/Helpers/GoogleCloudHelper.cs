@@ -7,6 +7,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Membership_Management.Infrastructure.Helpers
 {
@@ -39,6 +40,16 @@ namespace Membership_Management.Infrastructure.Helpers
             return files.Files.FirstOrDefault(p => p.Name == fileName);
         }
 
+        public static IList<Google.Apis.Drive.v3.Data.File> GetAllFiles()
+        {
+            if (driveService == null)
+                Login();
+
+            var request = driveService.Files.List();
+            var files = request.Execute();
+            return files.Files;
+        }
+
         public static Google.Apis.Drive.v3.Data.File CreateFile(string fileName, string mimeType)
         {
             var file = new Google.Apis.Drive.v3.Data.File
@@ -48,6 +59,15 @@ namespace Membership_Management.Infrastructure.Helpers
             };
 
             return driveService.Files.Create(file).Execute();
+        }
+
+        public static void UpdateFileName(string fileId, string fileName)
+        {
+            var fileUpdate = new Google.Apis.Drive.v3.Data.File
+            {
+                Name = fileName
+            };
+            driveService.Files.Update(fileUpdate, fileId).Execute();
         }
 
         public static void DeleteFile(string fileId)
