@@ -135,9 +135,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\padlock.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Images\home-white.png" />
     <Resource Include="Resources\Images\lock-white.png" />
   </ItemGroup>
@@ -150,6 +147,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\users-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\lock-yellow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

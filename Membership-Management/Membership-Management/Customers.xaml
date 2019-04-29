@@ -61,7 +61,7 @@
         </Grid>
 
         <!-- CUSTOMERS DATA GRID -->
-        <Grid Name="gridCustomers" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="20 50 20 20">
+        <Grid Name="gridCustomers" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="20 30 20 20">
             <DockPanel>
                 <Grid DockPanel.Dock="Top" Margin="0 0 0 10">
                     <StackPanel Orientation="Horizontal">
@@ -109,7 +109,6 @@
                             </DataGridTemplateColumn.CellTemplate>
 
                         </DataGridTemplateColumn>
-
 
                         <DataGridTextColumn Header="Reg." Binding="{Binding NotifyOnTargetUpdated=True, Path=RegNumber}" Width="auto">
                             <DataGridTextColumn.CellStyle>

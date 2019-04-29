@@ -18,7 +18,7 @@ namespace Membership_Management
 
             tbTotalMembers.Text = databaseService.GetCustomersCount(null).ToString();
             tbActiveMembers.Text = databaseService.GetCustomersCount(p => p.ValidUntil > DateTime.Now).ToString();
-            tbExpireingMembers.Text = databaseService.GetCustomersCount(p => p.ValidUntil > DateTime.Now.AddDays(-5) && p.ValidUntil <= DateTime.Now).ToString();
+            tbExpireingMembers.Text = databaseService.GetCustomersCount(p => p.ValidUntil < DateTime.Now.AddDays(5) && p.ValidUntil >= DateTime.Now).ToString();
             tbNewMembers.Text = databaseService.GetCustomersCount(p => p.RegDate >= new DateTime(now.Year, now.Month, 1, 0, 0, 0)).ToString();
         }
     }

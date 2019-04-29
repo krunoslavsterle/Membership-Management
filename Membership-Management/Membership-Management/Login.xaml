@@ -6,23 +6,21 @@
       xmlns:local="clr-namespace:Membership_Management"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
+      Background="#373943"
       Title="Login">
 
-    <Grid Background="#43596f">
+    <Grid>
         <StackPanel Orientation="Vertical" VerticalAlignment="Center">
             <Image Name="imgProjectArrow" 
-                   Source="pack://application:,,,/Resources/Images/padlock.png" 
+                   Source="pack://application:,,,/Resources/Images/lock-yellow.png" 
                    Height="190" 
                    Width="190"
-                   Margin="0 0 0 30"/>
+                   Margin="0 0 0 100"/>
             
-            <PasswordBox Name="pbxPassword"
-                 FontSize="25" 
-                 Height="40"
+            <PasswordBox Name="pbxPassword" Focusable="True"
+                 Foreground="White" FontSize="24" Background="#494b54" BorderBrush="#494b54" Padding="6"
                  Width="300"
-                 BorderBrush="Transparent"
                  HorizontalContentAlignment="Center"
-                 Foreground="#f2f2f2"
                 PasswordChanged="PbxPassword_PasswordChanged"></PasswordBox>
         </StackPanel>
         

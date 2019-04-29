@@ -24,6 +24,7 @@ namespace Membership_Management
             All,
             Active,
             Inactive,
+            Expiring,
             New
         }
 
@@ -37,7 +38,7 @@ namespace Membership_Management
 
             dgCustomers.ItemsSource = customers;
             cbxFilterBy.ItemsSource = Enum.GetValues(typeof(FilterBy));
-            cbxFilterBy.SelectedItem = FilterBy.All;
+            cbxFilterBy.SelectedItem = FilterBy.Active;
         }
         
         // Events
@@ -120,6 +121,9 @@ namespace Membership_Management
                     break;
                 case FilterBy.Inactive:
                     customers = new ObservableCollection<Customer>(databaseService.FindCustomers(p => p.ValidUntil <= DateTime.Now).ToList());
+                    break;
+                case FilterBy.Expiring:
+                    customers = new ObservableCollection<Customer>(databaseService.FindCustomers(p => p.ValidUntil < DateTime.Now.AddDays(5) && p.ValidUntil >= DateTime.Now).ToList());
                     break;
                 case FilterBy.New:
                     var now = DateTime.Now;
