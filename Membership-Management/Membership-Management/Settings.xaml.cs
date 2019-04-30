@@ -1,18 +1,8 @@
 ﻿using Membership_Management.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Membership_Management
 {
@@ -28,10 +18,58 @@ namespace Membership_Management
             InitializeComponent();
         }
 
-        private void BtnImportOldJSON_Click(object sender, RoutedEventArgs e)
+        private async void BtnImportJSON_Click(object sender, RoutedEventArgs e)
         {
             var filePath = tbxFilePath.Text;
-            importExportService.ImportOldJSON(filePath);
+            if (!File.Exists(filePath))
+            {
+                MessageBox.Show("File not exist!", "Import/Export Error");
+                return;
+            }
+
+            try
+            {
+                importExportService.ImportJSON(filePath);
+                MessageBox.Show("File imported!", "Import/Export Success");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Issue while importing File: {ex.Message}", "Import/Export Error");
+            }
+        }
+
+        private async void BtnImportJSONLegacy_Click(object sender, RoutedEventArgs e)
+        {
+            var filePath = tbxFilePath.Text;
+            if (!File.Exists(filePath))
+            {
+                MessageBox.Show("File not exist!", "Import/Export Error");
+                return;
+            }
+
+            try
+            {
+                importExportService.ImportOldJSON(filePath);
+                MessageBox.Show("File imported!", "Import/Export Success");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Issue while importing File: {ex.Message}", "Import/Export Error");
+            }
+        }
+
+        private async void BtnExportJSON_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var filePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                importExportService.ExportJSON(filePath);
+                MessageBox.Show("File exported to Destkop", "Import/Export Success");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Issue while exporting File: {ex.Message}", "Import/Export Error");
+            }
         }
     }
 }

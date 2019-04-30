@@ -7,22 +7,39 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Settings"
-      Background="#43596f">
+      Background="#373943">
 
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Orientation="Vertical" Margin="0 10 0 0">
-            <TextBox x:Name="tbxFilePath" Height="30" FontSize="22"></TextBox>
-            <StackPanel Orientation="Horizontal">
-                <Button Name="btnImportOldJSON" Click="BtnImportOldJSON_Click">Import Old JSON</Button>
-                <Button Name="btnImportJSON">Import JSON</Button>
-                <Button Name="btnExportJSON">Export JSON</Button>
+        <Grid Margin="10" Background="#40424c">
+            <StackPanel Orientation="Vertical" Margin="10">
+                <TextBlock Name="tbEditTitle" Foreground="#f6a821" Margin="6 0 0 30" FontWeight="Bold" FontSize="25" HorizontalAlignment="Center">Import/Export</TextBlock>
+
+                <TextBlock Foreground="White" Margin="6 0 0 2" FontWeight="Bold" FontSize="18">File Path</TextBlock>
+                <TextBox Name="tbxFilePath" Foreground="White" FontSize="18" Background="#494b54" BorderBrush="#494b54" Padding="6"></TextBox>
+
+                <Grid Margin="0 10 0 0">
+                    <Grid.ColumnDefinitions>                        
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Name="btnImportJSON" Padding="15 10 15 10" Background="#1c8ed7" Foreground="White" FontSize="18" FontWeight="Bold" BorderBrush="Transparent" Click="BtnImportJSON_Click">Import JSON</Button>
+                    <Button Name="btnImportJSONLegacy" Grid.Column="1" Padding="15 10 15 10" Background="#ed4949" Foreground="White" FontSize="18" FontWeight="Bold" BorderBrush="Transparent" Click="BtnImportJSONLegacy_Click">Import JSON (legacy)</Button>
+                </Grid>
+                <Button Grid.Column="1" Name="btnExportJSON" Padding="15 10 15 10" Background="#1c8ed7" Foreground="White" FontSize="18" FontWeight="Bold" BorderBrush="Transparent" Click="BtnExportJSON_Click">Export JSON</Button>
             </StackPanel>
-        </StackPanel>
+        </Grid>
+
+        <Grid Grid.Column="1" Margin="10" Background="#40424c">
+            <StackPanel Orientation="Vertical" Margin="10">
+               
+            </StackPanel>
+        </Grid>
+
     </Grid>
 </Page>

@@ -1,6 +1,7 @@
 ﻿using Membership_Management.Infrastructure.Helpers;
 using Membership_Management.Infrastructure.Models;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -12,12 +13,6 @@ namespace Membership_Management.Services
 
         public void ImportOldJSON(string path)
         {
-            if (string.IsNullOrEmpty(path))
-                return;
-
-            if (!File.Exists(path))
-                return;
-
             var json = File.ReadAllText(path);
             if (string.IsNullOrEmpty(json))
                 return;
@@ -32,6 +27,29 @@ namespace Membership_Management.Services
 
             databaseService.DeleteAllCustomers();
             databaseService.InsertCustomersBulk(customers);
+        }
+
+        public void ImportJSON(string path)
+        {
+            var json = File.ReadAllText(path);
+            if (string.IsNullOrEmpty(json))
+                return;
+
+            var customers = JsonConvert.DeserializeObject<List<Customer>>(json);
+            if (customers == null)
+                return;
+
+            databaseService.DeleteAllCustomers();
+            databaseService.InsertCustomersBulk(customers);
+        }
+
+        public  void ExportJSON(string path)
+        {
+            var customers = databaseService.GetAllCustomers();
+            var json = JsonConvert.SerializeObject(customers);
+            var now = DateTime.Now;
+
+            File.WriteAllText(System.IO.Path.Combine(path, $"customers-{now.ToString("yyyyMMdd")}"), json);
         }
 
         private Customer MapOldToNew(OldCustomer oldCustomer)
