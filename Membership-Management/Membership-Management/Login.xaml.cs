@@ -1,5 +1,4 @@
 ﻿using Membership_Management.Infrastructure.Helpers;
-using Membership_Management.Infrastructure.Services;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,14 +19,13 @@ namespace Membership_Management
             InitializeComponent();
             pbxPassword.Focus();
 
-            var syncServie = new SyncService();
-            var aq = syncServie.AquireLock();
+            //var aq = syncServie.AquireLock();
 
-            syncServie.SetDatabaseTimestamp(Guid.NewGuid().ToString());
+            //syncServie.SetDatabaseTimestamp(Guid.NewGuid().ToString());
 
-            var curTimestamp = syncServie.GetDatabaseTimestamp();
+            //var curTimestamp = syncServie.GetDatabaseTimestamp();
 
-            syncServie.RemoveLock();
+            //syncServie.RemoveLock();
 
             //  var removed = syncServie.RemoveLock();
 

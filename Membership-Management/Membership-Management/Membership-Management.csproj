@@ -79,12 +79,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Infrastructure\Helpers\GoogleCloudHelper.cs" />
     <Compile Include="Infrastructure\Helpers\StringExtensions.cs" />
     <Compile Include="Infrastructure\Helpers\TaskHelper.cs" />
     <Compile Include="Infrastructure\Models\Customer.cs" />
     <Compile Include="Infrastructure\Models\OldCustomer.cs" />
-    <Compile Include="Infrastructure\Services\SyncService.cs" />
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -171,6 +169,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\lock-yellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Infrastructure\Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
