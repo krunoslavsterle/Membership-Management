@@ -79,10 +79,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Infrastructure\Helpers\EmailHelper.cs" />
     <Compile Include="Infrastructure\Helpers\StringExtensions.cs" />
     <Compile Include="Infrastructure\Helpers\TaskHelper.cs" />
     <Compile Include="Infrastructure\Models\Customer.cs" />
+    <Compile Include="Infrastructure\Models\MasterPassword.cs" />
     <Compile Include="Infrastructure\Models\OldCustomer.cs" />
+    <Compile Include="Infrastructure\Models\SMTPSettings.cs" />
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>

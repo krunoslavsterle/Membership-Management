@@ -2,6 +2,7 @@
 using Membership_Management.Infrastructure.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace Membership_Management.Services
@@ -102,6 +103,67 @@ namespace Membership_Management.Services
             {
                 var customerCollection = db.GetCollection<Customer>();
                 var val = customerCollection.Insert(customer);
+            }
+        }
+
+        public SMTPSettings GetSMTPSettings()
+        {
+            using (var db = new LiteDatabase(databasePath))
+            {
+                var settingsCollection = db.GetCollection<SMTPSettings>();
+
+                var settings = settingsCollection.FindAll().FirstOrDefault();
+                if (settings == null)
+                {
+                    settings = new SMTPSettings()
+                    {
+                        Id = 1
+                    };
+
+                    settingsCollection.Insert(settings);
+                }
+
+                return settings;
+            }
+        }
+
+        public void UpdateSMTPSettings(SMTPSettings settings)
+        {
+            using (var db = new LiteDatabase(databasePath))
+            {
+                var settingsCollection = db.GetCollection<SMTPSettings>();
+                settingsCollection.Update(settings);
+            }
+        }
+
+        public MasterPassword GetMasterPassword()
+        {
+            using (var db = new LiteDatabase(databasePath))
+            {
+                var masterPasswordCollection = db.GetCollection<MasterPassword>();
+                var password = masterPasswordCollection.FindAll().FirstOrDefault();
+
+                if (password == null)
+                {
+                    password = new MasterPassword
+                    {
+                        Id = 1,
+                        Password = "1234"
+                    };
+
+                    masterPasswordCollection.Insert(password);
+                }
+
+                return password;
+            }
+        }
+
+        public void UpdateMasterPassword(MasterPassword masterPassword)
+        {
+            using (var db = new LiteDatabase(databasePath))
+            {
+                var masterPasswordCollection = db.GetCollection<MasterPassword>();
+                masterPasswordCollection.Update(masterPassword);
             }
         }
     }

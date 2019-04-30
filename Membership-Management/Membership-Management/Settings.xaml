@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Membership_Management"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="800" d:DesignWidth="1200"
       Title="Settings"
       Background="#373943">
 
@@ -15,9 +15,15 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
         <Grid Margin="10" Background="#40424c">
-            <StackPanel Orientation="Vertical" Margin="10">
-                <TextBlock Name="tbEditTitle" Foreground="#f6a821" Margin="6 0 0 30" FontWeight="Bold" FontSize="25" HorizontalAlignment="Center">Import/Export</TextBlock>
+            
+            <StackPanel Orientation="Vertical" Margin="10 30 10 0">
+                <TextBlock Foreground="#f6a821" Margin="6 0 0 50" FontWeight="Bold" FontSize="25" HorizontalAlignment="Center">Import/Export</TextBlock>
 
                 <TextBlock Foreground="White" Margin="6 0 0 2" FontWeight="Bold" FontSize="18">File Path</TextBlock>
                 <TextBox Name="tbxFilePath" Foreground="White" FontSize="18" Background="#494b54" BorderBrush="#494b54" Padding="6"></TextBox>
@@ -33,13 +39,66 @@
                 </Grid>
                 <Button Grid.Column="1" Name="btnExportJSON" Padding="15 10 15 10" Background="#1c8ed7" Foreground="White" FontSize="18" FontWeight="Bold" BorderBrush="Transparent" Click="BtnExportJSON_Click">Export JSON</Button>
             </StackPanel>
+
         </Grid>
 
-        <Grid Grid.Column="1" Margin="10" Background="#40424c">
-            <StackPanel Orientation="Vertical" Margin="10">
-               
+        <Grid Grid.Row="1" Margin="10" Background="#40424c">
+            <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10 30 10 0">
+                <TextBlock Foreground="#f6a821" Margin="6 0 0 50" FontWeight="Bold" FontSize="25" HorizontalAlignment="Center">Master Password</TextBlock>
+
+                <TextBlock Foreground="White" Margin="6 0 0 2" FontWeight="Bold" FontSize="18">Password</TextBlock>
+                <PasswordBox Name="tbxMasterPassword" Foreground="White" FontSize="18" Background="#494b54" BorderBrush="#494b54" Padding="6"></PasswordBox>
+
+                <Button Name="btnUpdateMasterPassword" Margin="0 20 0 0" Padding="15 10 15 10" Background="#20c05c" Foreground="White" FontSize="18" FontWeight="Bold" BorderBrush="Transparent" Click="BtnUpdateMasterPassword_Click">Update</Button>
             </StackPanel>
         </Grid>
 
+        <Grid Grid.Column="1" Margin="10" Background="#40424c">
+            <StackPanel Orientation="Vertical" Margin="10 30 10 0">
+                <TextBlock Foreground="#f6a821" Margin="6 0 0 50" FontWeight="Bold" FontSize="25" HorizontalAlignment="Center">Email Notifications</TextBlock>
+
+                <CheckBox Foreground="White" FontWeight="Bold" FontSize="12" Content="Enabled">
+                    <CheckBox.LayoutTransform>
+                        <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                    </CheckBox.LayoutTransform>
+                </CheckBox>
+
+                <Grid Margin="0 10 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <DockPanel Margin="0 0 5 0">
+                        <TextBlock DockPanel.Dock="Top" Foreground="White" Margin="6 10 0 2" FontWeight="Bold" FontSize="18">Server Name</TextBlock>
+                        <TextBox Name="tbxServerName" Foreground="White" FontSize="18" Background="#494b54" BorderBrush="#494b54" Padding="6"></TextBox>
+                    </DockPanel>
+
+                    <DockPanel Grid.Column="1" Margin="5 0 0 0">
+                        <TextBlock DockPanel.Dock="Top" Foreground="White" Margin="6 10 0 2" FontWeight="Bold" FontSize="18">Port Number</TextBlock>
+                        <TextBox Name="tbxPortNumber" Foreground="White" FontSize="18" Background="#494b54" BorderBrush="#494b54" Padding="6"></TextBox>
+                    </DockPanel>
+                </Grid>
+
+                <Grid Margin="0 10 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <DockPanel Margin="0 0 5 0">
+                        <TextBlock DockPanel.Dock="Top" Foreground="White" Margin="6 10 0 2" FontWeight="Bold" FontSize="18">Username</TextBlock>
+                        <TextBox Name="tbxUsername" Foreground="White" FontSize="18" Background="#494b54" BorderBrush="#494b54" Padding="6"></TextBox>
+                    </DockPanel>
+
+                    <DockPanel Grid.Column="1" Margin="5 0 0 0">
+                        <TextBlock DockPanel.Dock="Top" Foreground="White" Margin="6 10 0 2" FontWeight="Bold" FontSize="18">Password</TextBlock>
+                        <PasswordBox Name="tbxPassword" Foreground="White" FontSize="18" Background="#494b54" BorderBrush="#494b54" Padding="6"></PasswordBox>
+                    </DockPanel>
+                </Grid>
+
+                <Button Name="btnSaveSMTP" Margin="0 20 0 0" Padding="15 10 15 10" Background="#20c05c" Foreground="White" FontSize="18" FontWeight="Bold" BorderBrush="Transparent" Click="BtnSaveSMTP_Click">Update</Button>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

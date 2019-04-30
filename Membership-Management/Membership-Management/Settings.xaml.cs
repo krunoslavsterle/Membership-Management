@@ -1,4 +1,5 @@
-﻿using Membership_Management.Services;
+﻿using Membership_Management.Infrastructure.Models;
+using Membership_Management.Services;
 using System;
 using System.IO;
 using System.Windows;
@@ -12,10 +13,20 @@ namespace Membership_Management
     public partial class Settings : Page
     {
         private ImportExportService importExportService = new ImportExportService();
+        private DatabaseService databaseService = new DatabaseService();
 
         public Settings()
         {
             InitializeComponent();
+
+            var smtpSettings = databaseService.GetSMTPSettings();
+            var masterPassword = databaseService.GetMasterPassword();
+
+            tbxPortNumber.Text = smtpSettings.Port.ToString();
+            tbxServerName.Text = smtpSettings.ServerName;
+            tbxUsername.Text = smtpSettings.Username;
+            tbxPassword.Password = smtpSettings.Password;
+            tbxMasterPassword.Password = masterPassword.Password;
         }
 
         private async void BtnImportJSON_Click(object sender, RoutedEventArgs e)
@@ -69,6 +80,53 @@ namespace Membership_Management
             catch (Exception ex)
             {
                 MessageBox.Show($"Issue while exporting File: {ex.Message}", "Import/Export Error");
+            }
+        }
+
+        private void BtnSaveSMTP_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var smtpSettings = new SMTPSettings
+                {
+                    Id = 1,
+                    Password = tbxPassword.Password,
+                    Port = Int32.Parse(tbxPortNumber.Text),
+                    ServerName = tbxServerName.Text,
+                    Username = tbxUsername.Text
+                };
+
+                databaseService.UpdateSMTPSettings(smtpSettings);
+                MessageBox.Show("SMTP Settings Updated", "SMTP Settings Success");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Issue while updating SMTP Settings: {ex.Message}", "SMTP Settings Error");
+            }
+        }
+
+        private void BtnUpdateMasterPassword_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(tbxMasterPassword.Password))
+            {
+                MessageBox.Show("Master Password is mandatory!", "Master Password Error");
+                return;
+            }
+
+            try
+            {
+                var masterPassword = new MasterPassword
+                {
+                    Id = 1,
+                    Password = tbxMasterPassword.Password                   
+                };
+
+                databaseService.UpdateMasterPassword(masterPassword);
+                MessageBox.Show("Master Password Updated", "Master Password Success");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Issue while updating Master Password: {ex.Message}", "Master Password Error");
             }
         }
     }

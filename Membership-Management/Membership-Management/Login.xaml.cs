@@ -1,42 +1,32 @@
-﻿using Membership_Management.Infrastructure.Helpers;
+﻿using Membership_Management.Services;
 using System;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace Membership_Management
 {
-    /// <summary>
-    /// Interaction logic for Login.xaml
-    /// </summary>
     public partial class Login : Page
     {
-        private const String MASTER_PASSWORD = "1234";
+        private DatabaseService databaseService = new DatabaseService();
+        private string masterPassword = null;
 
         public Login()
         {
             InitializeComponent();
             pbxPassword.Focus();
-
-            //var aq = syncServie.AquireLock();
-
-            //syncServie.SetDatabaseTimestamp(Guid.NewGuid().ToString());
-
-            //var curTimestamp = syncServie.GetDatabaseTimestamp();
-
-            //syncServie.RemoveLock();
-
-            //  var removed = syncServie.RemoveLock();
-
-            //TaskHelper.RunPeriodicAsync(GoogleCloudHelper.ListFiles, TimeSpan.FromSeconds(5), TimeSpan.FromHours(2), CancellationToken.None);
+            masterPassword = databaseService.GetMasterPassword().Password;
         }
 
         private void PbxPassword_PasswordChanged(object sender, RoutedEventArgs e)
         {
-            var password = pbxPassword.Password;
-            if (password == MASTER_PASSWORD)
-                this.NavigationService.Navigate(new Uri("Home.xaml", UriKind.Relative));
+            if (string.IsNullOrEmpty(masterPassword))
+                MessageBox.Show("Can't find Master Password in the Database. Please contact the developer", "Master Passwrod Error");
+            else
+            {
+                var password = pbxPassword.Password;
+                if (password == masterPassword)
+                    this.NavigationService.Navigate(new Uri("Home.xaml", UriKind.Relative));
+            }
         }
     }
 }
