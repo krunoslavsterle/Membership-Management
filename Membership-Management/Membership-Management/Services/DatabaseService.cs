@@ -2,6 +2,7 @@
 using Membership_Management.Infrastructure.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -14,7 +15,16 @@ namespace Membership_Management.Services
 
         public DatabaseService()
         {
-            databasePath = $"{Environment.GetEnvironmentVariable("OneDrive")}\\{DB_NAME}";
+            // Check One Drive dir exists.
+            var oneDrivePath = Environment.GetEnvironmentVariable("OneDrive");
+            var dbDirPath = String.Empty;
+            if (string.IsNullOrEmpty(oneDrivePath))
+                dbDirPath = $"{System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Database";
+            else
+                dbDirPath = $"{Environment.GetEnvironmentVariable("OneDrive")}\\Database";
+
+            Directory.CreateDirectory(dbDirPath);
+            databasePath = $"{dbDirPath}\\{DB_NAME}";
         }
         
         public void ValidateDatabaseExist()
