@@ -100,5 +100,13 @@
                 <Button Name="btnSaveSMTP" Margin="0 20 0 0" Padding="15 10 15 10" Background="#20c05c" Foreground="White" FontSize="18" FontWeight="Bold" BorderBrush="Transparent" Click="BtnSaveSMTP_Click">Update</Button>
             </StackPanel>
         </Grid>
+        <Grid Grid.Column="1" Grid.Row="1" Margin="10" Background="#40424c">
+            <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10 30 10 0">
+                <TextBlock Foreground="#f6a821" Margin="6 0 0 50" FontWeight="Bold" FontSize="25" HorizontalAlignment="Center">Database</TextBlock>
+
+                <TextBlock Foreground="White" Margin="6 0 0 2" FontWeight="Bold" FontSize="18">Database Path</TextBlock>
+                <TextBox Name="tbDatabasePath" Foreground="White" FontSize="18" Background="#494b54" Padding="6" BorderBrush="#494b54" IsReadOnly="True"></TextBox>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

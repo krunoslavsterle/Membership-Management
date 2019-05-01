@@ -11,25 +11,28 @@ namespace Membership_Management.Services
     public class DatabaseService
     {
         private const string DB_NAME = "membership-database.db";
-        private string databasePath;
+        public string DatabasePath { get; }
 
         public DatabaseService()
         {
-            // Check One Drive dir exists.
-            var oneDrivePath = Environment.GetEnvironmentVariable("OneDrive");
-            var dbDirPath = String.Empty;
-            if (string.IsNullOrEmpty(oneDrivePath))
-                dbDirPath = $"{System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Database";
-            else
-                dbDirPath = $"{Environment.GetEnvironmentVariable("OneDrive")}\\Database";
+            if (string.IsNullOrEmpty(DatabasePath))
+            {
+                // Check One Drive dir exists.
+                var oneDrivePath = Environment.GetEnvironmentVariable("OneDrive");
+                var dbDirPath = String.Empty;
+                if (string.IsNullOrEmpty(oneDrivePath))
+                    dbDirPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\\Database";
+                else
+                    dbDirPath = $"{Environment.GetEnvironmentVariable("OneDrive")}\\Database";
 
-            Directory.CreateDirectory(dbDirPath);
-            databasePath = $"{dbDirPath}\\{DB_NAME}";
+                Directory.CreateDirectory(dbDirPath);
+                DatabasePath = $"{dbDirPath}\\{DB_NAME}";
+            }
         }
         
         public void ValidateDatabaseExist()
         {
-            using (var db = new LiteDatabase(databasePath))
+            using (var db = new LiteDatabase(DatabasePath))
             {
                 db.FileStorage.FindAll();
             }
@@ -37,7 +40,7 @@ namespace Membership_Management.Services
 
         public void DeleteAllCustomers()
         {
-            using (var db = new LiteDatabase(databasePath))
+            using (var db = new LiteDatabase(DatabasePath))
             {
                 var customerCollection = db.GetCollection<Customer>();
                 customerCollection.Delete(p => p.Id > -1);
@@ -46,7 +49,7 @@ namespace Membership_Management.Services
 
         public void InsertCustomersBulk(List<Customer> customers)
         {
-            using (var db = new LiteDatabase(databasePath))
+            using (var db = new LiteDatabase(DatabasePath))
             {
                 var customerCollection = db.GetCollection<Customer>();
                 customerCollection.InsertBulk(customers);
@@ -55,7 +58,7 @@ namespace Membership_Management.Services
 
         public IEnumerable<Customer> GetAllCustomers()
         {
-            using (var db = new LiteDatabase(databasePath))
+            using (var db = new LiteDatabase(DatabasePath))
             {
                 var customerCollection = db.GetCollection<Customer>();
                 return customerCollection.FindAll();
@@ -64,7 +67,7 @@ namespace Membership_Management.Services
 
         public IEnumerable<Customer> FindCustomers(Expression<Func<Customer, bool>> predicate)
         {
-            using (var db = new LiteDatabase(databasePath))
+            using (var db = new LiteDatabase(DatabasePath))
             {
                 var customerCollection = db.GetCollection<Customer>();
 
@@ -77,7 +80,7 @@ namespace Membership_Management.Services
 
         public int GetCustomersCount(Expression<Func<Customer, bool>> predicate)
         {
-            using (var db = new LiteDatabase(databasePath))
+            using (var db = new LiteDatabase(DatabasePath))
             {
                 var customerCollection = db.GetCollection<Customer>();
 
@@ -90,7 +93,7 @@ namespace Membership_Management.Services
 
         public void DeleteCustomer(int id)
         {
-            using (var db = new LiteDatabase(databasePath))
+            using (var db = new LiteDatabase(DatabasePath))
             {
                 var customerCollection = db.GetCollection<Customer>();
                 customerCollection.Delete(p => p.Id == id);
@@ -99,7 +102,7 @@ namespace Membership_Management.Services
 
         public void UpdateCustomer(Customer customer)
         {
-            using (var db = new LiteDatabase(databasePath))
+            using (var db = new LiteDatabase(DatabasePath))
             {
                 var customerCollection = db.GetCollection<Customer>();
                 customerCollection.Update(customer);
@@ -109,7 +112,7 @@ namespace Membership_Management.Services
         public void InsertCustomer(Customer customer)
         {
             customer.RegDate = DateTime.Now;
-            using (var db = new LiteDatabase(databasePath))
+            using (var db = new LiteDatabase(DatabasePath))
             {
                 var customerCollection = db.GetCollection<Customer>();
                 var val = customerCollection.Insert(customer);
@@ -118,7 +121,7 @@ namespace Membership_Management.Services
 
         public SMTPSettings GetSMTPSettings()
         {
-            using (var db = new LiteDatabase(databasePath))
+            using (var db = new LiteDatabase(DatabasePath))
             {
                 var settingsCollection = db.GetCollection<SMTPSettings>();
 
@@ -139,7 +142,7 @@ namespace Membership_Management.Services
 
         public void UpdateSMTPSettings(SMTPSettings settings)
         {
-            using (var db = new LiteDatabase(databasePath))
+            using (var db = new LiteDatabase(DatabasePath))
             {
                 var settingsCollection = db.GetCollection<SMTPSettings>();
                 settingsCollection.Update(settings);
@@ -148,7 +151,7 @@ namespace Membership_Management.Services
 
         public MasterPassword GetMasterPassword()
         {
-            using (var db = new LiteDatabase(databasePath))
+            using (var db = new LiteDatabase(DatabasePath))
             {
                 var masterPasswordCollection = db.GetCollection<MasterPassword>();
                 var password = masterPasswordCollection.FindAll().FirstOrDefault();
@@ -170,7 +173,7 @@ namespace Membership_Management.Services
 
         public void UpdateMasterPassword(MasterPassword masterPassword)
         {
-            using (var db = new LiteDatabase(databasePath))
+            using (var db = new LiteDatabase(DatabasePath))
             {
                 var masterPasswordCollection = db.GetCollection<MasterPassword>();
                 masterPasswordCollection.Update(masterPassword);

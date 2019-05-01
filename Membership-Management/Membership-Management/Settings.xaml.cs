@@ -27,6 +27,7 @@ namespace Membership_Management
             tbxUsername.Text = smtpSettings.Username;
             tbxPassword.Password = smtpSettings.Password;
             tbxMasterPassword.Password = masterPassword.Password;
+            tbDatabasePath.Text = databaseService.DatabasePath;
         }
 
         private async void BtnImportJSON_Click(object sender, RoutedEventArgs e)
