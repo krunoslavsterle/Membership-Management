@@ -4,10 +4,20 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Membership_Management"
+      Name="page"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Background="#373943"
-      Title="Customers">
+      Title="Customers"
+      Loaded="Page_Loaded">
+
+    <Page.Resources>
+        <ControlTemplate x:Key="datepickerButtonTemplate" TargetType="Button">
+            <Border x:Name="Border" Background="Orange">
+                <ContentPresenter Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+        </ControlTemplate>
+    </Page.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -40,12 +50,75 @@
 
                 <TextBlock Margin="6 10 0 2" Foreground="White" FontWeight="Bold" FontSize="18">Subscription Expiring</TextBlock>
                 <DatePicker Name="dPickerEditExpiring" BorderBrush="#494b54" Padding="0" SelectedDateFormat="Short" IsTodayHighlighted="True">
+                    <DatePicker.CalendarStyle>
+                            <Style TargetType="Calendar">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Calendar}">
+                                            <Viewbox Height="400" Width="400">
+                                                <CalendarItem x:Name="PART_CalendarItem" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"/>
+                                            </Viewbox>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                    </DatePicker.CalendarStyle>
                     <DatePicker.Resources>
-                        <Style TargetType="{x:Type DatePickerTextBox}">
-                            <Setter Property="Control.Template">
+                        <Style TargetType="{x:Type DatePicker}">
+                            <Setter Property="Template">
                                 <Setter.Value>
-                                    <ControlTemplate>
-                                        <TextBox x:Name="PART_TextBox" Foreground="White" FontSize="18" Background="#494b54" BorderBrush="#494b54" Padding="6" Text="{Binding Path=SelectedDate, RelativeSource={RelativeSource AncestorType={x:Type DatePicker}}, StringFormat=d}" />
+                                    <ControlTemplate TargetType="DatePicker">
+                                        <Border>
+                                            <Grid x:Name="PART_Root" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <DatePickerTextBox x:Name="PART_TextBox" Grid.Row="0">
+                                                    <DatePickerTextBox.Style>
+                                                        <Style TargetType="{x:Type DatePickerTextBox}">
+                                                            <Setter Property="Control.Template">
+                                                                <Setter.Value>
+                                                                    <ControlTemplate>
+                                                                        <TextBox x:Name="PART_TextBox" Foreground="White" FontSize="18" Background="#494b54" BorderBrush="#494b54" Padding="6" Text="{Binding Path=SelectedDate, RelativeSource={RelativeSource AncestorType={x:Type DatePicker}}, StringFormat=d}" />
+                                                                    </ControlTemplate>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </Style>
+                                                    </DatePickerTextBox.Style>
+                                                </DatePickerTextBox>
+
+                                                <Button x:Name="PART_Button"
+                                                    Grid.Column="1"
+                                                    Background="Transparent"
+                                                    BorderBrush="Transparent"
+                                                    Focusable="False"
+                                                    HorizontalAlignment="Left"
+                                                    Grid.Row="0"
+                                                    VerticalAlignment="Top"
+                                                    Padding="0">
+                                                    <Image Height="35" Margin="1" Width="auto" Source="pack://application:,,,/Resources/Images/calendar.png" />
+                                                </Button>
+                                               
+                                                <Grid x:Name="PART_DisabledVisual"
+                                                    Grid.ColumnSpan="2"
+                                                    Grid.Column="0"
+                                                    IsHitTestVisible="False"
+                                                    Opacity="0"
+                                                    Grid.Row="0">
+                                                  
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    
+                                                    <Rectangle Grid.Column="0" Fill="#A5FFFFFF" RadiusY="1" Grid.Row="0" RadiusX="1" />
+                                                    <Rectangle Grid.Column="1" Fill="#A5FFFFFF" Height="18" Margin="3,0,3,0" RadiusY="1" Grid.Row="0" RadiusX="1" Width="19" />
+                                                    <Popup x:Name="PART_Popup" AllowsTransparency="True" Placement="Bottom" PlacementTarget="{Binding ElementName=PART_TextBox}" StaysOpen="False" />
+                                                </Grid>
+                                            </Grid>
+                                        </Border>
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>

@@ -176,5 +176,8 @@
   <ItemGroup>
     <Folder Include="Infrastructure\Services\" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\calendar.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
