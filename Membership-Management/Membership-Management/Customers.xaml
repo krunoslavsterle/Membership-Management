@@ -133,164 +133,161 @@
         </Grid>
 
         <!-- CUSTOMERS DATA GRID -->
-        <Grid Name="gridCustomers" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="20 30 20 20">
+        <Grid Name="gridCustomers" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="5">
             <DockPanel>
-                <Grid DockPanel.Dock="Top" Margin="0 0 0 10">
+                <Grid DockPanel.Dock="Top" Margin="0 0 0 5">
                     <StackPanel Orientation="Horizontal">
-                        <ComboBox Name="cbxFilterBy" Margin="0 0 30 0" Width="200" FontSize="18" Background="Red" SelectionChanged="CbxFilterBy_SelectionChanged">
+                        <ComboBox Name="cbxFilterBy" Margin="0 0 20 0" Width="200" Background="Red" SelectionChanged="CbxFilterBy_SelectionChanged">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Path=.}" FontSize="26" Padding="15 0 0 0"/>
+                                    <TextBlock Text="{Binding Path=.}" FontSize="19" Padding="15 0 0 0"/>
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
 
-                        <TextBox Name="tbxSearch" HorizontalAlignment="Left" Padding="5" FontSize="23" Width="400" PreviewKeyUp="TbxSearch_PreviewKeyUp"></TextBox>
-                        <Button Name="btnSearch" DockPanel.Dock="Top" HorizontalAlignment="Left" Padding="15 10 15 10" Background="#1c8ed7" Foreground="White" FontSize="18" FontWeight="Bold" BorderBrush="Transparent" Click="BtnSearch_Click">Find</Button>
+                        <TextBox Name="tbxSearch" HorizontalAlignment="Left" Padding="2"  FontSize="18" Width="400" PreviewKeyUp="TbxSearch_PreviewKeyUp"></TextBox>
+                        <Button Name="btnSearch" DockPanel.Dock="Top" Padding="10 0 10 0" HorizontalAlignment="Left" Background="#1c8ed7" Foreground="White" FontSize="18" FontWeight="Bold" BorderBrush="Transparent" Click="BtnSearch_Click">Find</Button>
                     </StackPanel>
 
-                    <Button Name="btnAddNew" DockPanel.Dock="Top" HorizontalAlignment="Right" Padding="15 10 15 10" Background="#20c05c" Foreground="White" FontSize="18" FontWeight="Bold" BorderBrush="Transparent" Click="BtnAddNew_Click">Add New</Button>
+                    <Button Name="btnAddNew" DockPanel.Dock="Top" HorizontalAlignment="Right" Padding="10 0 10 0" Background="#20c05c" Foreground="White" FontSize="15" FontWeight="Bold" BorderBrush="Transparent" Click="BtnAddNew_Click">Add New</Button>
                 </Grid>
 
-                <DataGrid DockPanel.Dock="Top" Name="dgCustomers" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" CanUserDeleteRows="True"
+                <DataGrid Margin="0" Padding="0" Name="dgCustomers" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" CanUserDeleteRows="True"
                           VirtualizingStackPanel.VirtualizationMode="Recycling" VirtualizingStackPanel.IsVirtualizing="True" FrozenColumnCount ="1" GridLinesVisibility="None" HorizontalAlignment="Stretch" ColumnWidth="*">
-                    <DataGrid.Columns>
-                        <DataGridTemplateColumn Width="auto">
-                            <DataGridTemplateColumn.HeaderStyle>
-                                <Style TargetType="DataGridColumnHeader">
-                                    <Setter Property="FontSize" Value="18"></Setter>
-                                </Style>
-                            </DataGridTemplateColumn.HeaderStyle>
-                            <DataGridTemplateColumn.CellStyle>
-                                <Style TargetType="DataGridCell">
-                                    <Setter Property="BorderBrush" Value="Gray"></Setter>
-                                    <Setter Property="BorderThickness" Value="0 0 0 1"></Setter>
-                                </Style>
-                            </DataGridTemplateColumn.CellStyle>
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" Margin="5 0 30 0">
-                                        <Button Name="btnEdit" Click="BtnEdit_Click" Background="Transparent" BorderBrush="Transparent">
-                                            <Image Height="20" Width="20" Margin="5" Source="pack://application:,,,/Resources/Images/pencil.png" />
-                                        </Button>
-                                        <Button Name="btnDelete" Click="BtnDelete_Click" Background="Transparent" BorderBrush="Transparent">
-                                            <Image Height="20" Width="20" Margin="5" Source="pack://application:,,,/Resources/Images/bin.png" />
-                                        </Button>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Width="60">
+                                <DataGridTemplateColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="BorderBrush" Value="Gray"></Setter>
+                                        <Setter Property="BorderThickness" Value="0 0 0 1"></Setter>
+                                    </Style>
+                                </DataGridTemplateColumn.CellStyle>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Name="btnEdit" Click="BtnEdit_Click" Background="Transparent" BorderBrush="Transparent">
+                                                <Image Height="20" Width="20"  Source="pack://application:,,,/Resources/Images/pencil.png" />
+                                            </Button>
+                                            <Button Name="btnDelete" Click="BtnDelete_Click" Background="Transparent" BorderBrush="Transparent">
+                                                <Image Height="20" Width="20"  Source="pack://application:,,,/Resources/Images/bin.png" />
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
 
-                        </DataGridTemplateColumn>
+                            </DataGridTemplateColumn>
 
-                        <DataGridTextColumn Header="Reg." Binding="{Binding NotifyOnTargetUpdated=True, Path=RegNumber}" Width="auto">
-                            <DataGridTextColumn.CellStyle>
-                                <Style TargetType="DataGridCell">
-                                    <Setter Property="FontSize" Value="20"></Setter>
-                                    <Setter Property="BorderBrush" Value="Gray"></Setter>
-                                    <Setter Property="BorderThickness" Value="0 0 0 1"></Setter>
-                                    <Setter Property="Foreground" Value="#21262d"></Setter>
-                                    <Setter Property="Padding" Value="0 0 20 0"></Setter>
-                                </Style>
-                            </DataGridTextColumn.CellStyle>
-                            <DataGridTextColumn.HeaderStyle>
-                                <Style TargetType="DataGridColumnHeader">
-                                    <Setter Property="FontSize" Value="20"></Setter>
-                                    <Setter Property="Padding" Value="5 0 25 0"></Setter>
-                                </Style>
-                            </DataGridTextColumn.HeaderStyle>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn Header="First Name" Binding="{Binding FirstName, UpdateSourceTrigger=Explicit}">
-                            <DataGridTextColumn.CellStyle>
-                                <Style TargetType="DataGridCell">
-                                    <Setter Property="FontSize" Value="20"></Setter>
-                                    <Setter Property="BorderBrush" Value="Gray"></Setter>
-                                    <Setter Property="BorderThickness" Value="0 0 0 1"></Setter>
-                                    <Setter Property="Foreground" Value="#21262d"></Setter>
-                                </Style>
-                            </DataGridTextColumn.CellStyle>
-                            <DataGridTextColumn.HeaderStyle>
-                                <Style TargetType="DataGridColumnHeader">
-                                    <Setter Property="FontSize" Value="20"></Setter>
-                                </Style>
-                            </DataGridTextColumn.HeaderStyle>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}">
-                            <DataGridTextColumn.CellStyle>
-                                <Style TargetType="DataGridCell">
-                                    <Setter Property="FontSize" Value="20"></Setter>
-                                    <Setter Property="BorderBrush" Value="Gray"></Setter>
-                                    <Setter Property="BorderThickness" Value="0 0 0 1"></Setter>
-                                    <Setter Property="Foreground" Value="#21262d"></Setter>
-                                </Style>
-                            </DataGridTextColumn.CellStyle>
-                            <DataGridTextColumn.HeaderStyle>
-                                <Style TargetType="DataGridColumnHeader">
-                                    <Setter Property="FontSize" Value="20"></Setter>
-                                </Style>
-                            </DataGridTextColumn.HeaderStyle>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn Header="Address" Binding="{Binding Address}">
-                            <DataGridTextColumn.CellStyle>
-                                <Style TargetType="DataGridCell">
-                                    <Setter Property="FontSize" Value="20"></Setter>
-                                    <Setter Property="BorderBrush" Value="Gray"></Setter>
-                                    <Setter Property="BorderThickness" Value="0 0 0 1"></Setter>
-                                    <Setter Property="Foreground" Value="#21262d"></Setter>
-                                </Style>
-                            </DataGridTextColumn.CellStyle>
-                            <DataGridTextColumn.HeaderStyle>
-                                <Style TargetType="DataGridColumnHeader">
-                                    <Setter Property="FontSize" Value="20"></Setter>
-                                </Style>
-                            </DataGridTextColumn.HeaderStyle>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn Header="Registrated" Binding="{Binding RegDate}">
-                            <DataGridTextColumn.CellStyle>
-                                <Style TargetType="DataGridCell">
-                                    <Setter Property="FontSize" Value="20"></Setter>
-                                    <Setter Property="BorderBrush" Value="Gray"></Setter>
-                                    <Setter Property="BorderThickness" Value="0 0 0 1"></Setter>
-                                    <Setter Property="Foreground" Value="#21262d"></Setter>
-                                </Style>
-                            </DataGridTextColumn.CellStyle>
-                            <DataGridTextColumn.HeaderStyle>
-                                <Style TargetType="DataGridColumnHeader">
-                                    <Setter Property="FontSize" Value="20"></Setter>
-                                </Style>
-                            </DataGridTextColumn.HeaderStyle>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn Header="Valid Until" Binding="{Binding ValidUntil, StringFormat=d}">
-                            <DataGridTextColumn.CellStyle>
-                                <Style TargetType="DataGridCell">
-                                    <Setter Property="FontSize" Value="20"></Setter>
-                                    <Setter Property="BorderBrush" Value="Gray"></Setter>
-                                    <Setter Property="BorderThickness" Value="0 0 0 1"></Setter>
-                                    <Setter Property="Foreground" Value="#21262d"></Setter>
-                                </Style>
-                            </DataGridTextColumn.CellStyle>
-                            <DataGridTextColumn.HeaderStyle>
-                                <Style TargetType="DataGridColumnHeader">
-                                    <Setter Property="FontSize" Value="20"></Setter>
-                                </Style>
-                            </DataGridTextColumn.HeaderStyle>
-                        </DataGridTextColumn>
-                        <DataGridTextColumn Header="Email" Binding="{Binding Email}" MinWidth="200">
-                            <DataGridTextColumn.CellStyle>
-                                <Style TargetType="DataGridCell">
-                                    <Setter Property="FontSize" Value="20"></Setter>
-                                    <Setter Property="BorderBrush" Value="Gray"></Setter>
-                                    <Setter Property="BorderThickness" Value="0 0 0 1"></Setter>
-                                    <Setter Property="Foreground" Value="#21262d"></Setter>
-                                </Style>
-                            </DataGridTextColumn.CellStyle>
-                            <DataGridTextColumn.HeaderStyle>
-                                <Style TargetType="DataGridColumnHeader">
-                                    <Setter Property="FontSize" Value="20"></Setter>
-                                </Style>
-                            </DataGridTextColumn.HeaderStyle>
-                        </DataGridTextColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+                            <DataGridTextColumn Header="Reg." Binding="{Binding NotifyOnTargetUpdated=True, Path=RegNumber}" Width="90">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="FontSize" Value="20"></Setter>
+                                        <Setter Property="BorderBrush" Value="Gray"></Setter>
+                                        <Setter Property="BorderThickness" Value="0 0 0 1"></Setter>
+                                        <Setter Property="Foreground" Value="#21262d"></Setter>
+                                        <Setter Property="Padding" Value="0 0 0 0"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="FontSize" Value="20"></Setter>
+                                        <Setter Property="Padding" Value="5 0 0 0"></Setter>
+                                    <Setter Property="Width" Value="auto"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="First Name" Binding="{Binding FirstName, UpdateSourceTrigger=Explicit}">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="FontSize" Value="20"></Setter>
+                                        <Setter Property="BorderBrush" Value="Gray"></Setter>
+                                        <Setter Property="BorderThickness" Value="0 0 0 1"></Setter>
+                                        <Setter Property="Foreground" Value="#21262d"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="FontSize" Value="20"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="FontSize" Value="20"></Setter>
+                                        <Setter Property="BorderBrush" Value="Gray"></Setter>
+                                        <Setter Property="BorderThickness" Value="0 0 0 1"></Setter>
+                                        <Setter Property="Foreground" Value="#21262d"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="FontSize" Value="20"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Address" Binding="{Binding Address}">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="FontSize" Value="20"></Setter>
+                                        <Setter Property="BorderBrush" Value="Gray"></Setter>
+                                        <Setter Property="BorderThickness" Value="0 0 0 1"></Setter>
+                                        <Setter Property="Foreground" Value="#21262d"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="FontSize" Value="20"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Registrated" Binding="{Binding RegDate, StringFormat=d}" Width="130">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="FontSize" Value="20"></Setter>
+                                        <Setter Property="BorderBrush" Value="Gray"></Setter>
+                                        <Setter Property="BorderThickness" Value="0 0 0 1"></Setter>
+                                        <Setter Property="Foreground" Value="#21262d"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="FontSize" Value="20"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
+                        <DataGridTextColumn Header="Valid Until" Binding="{Binding ValidUntil, StringFormat=d}" Width="130">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="FontSize" Value="20"></Setter>
+                                        <Setter Property="BorderBrush" Value="Gray"></Setter>
+                                        <Setter Property="BorderThickness" Value="0 0 0 1"></Setter>
+                                        <Setter Property="Foreground" Value="#21262d"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="FontSize" Value="20"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Email" Binding="{Binding Email}" MinWidth="200">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="FontSize" Value="20"></Setter>
+                                        <Setter Property="BorderBrush" Value="Gray"></Setter>
+                                        <Setter Property="BorderThickness" Value="0 0 0 1"></Setter>
+                                        <Setter Property="Foreground" Value="#21262d"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="FontSize" Value="20"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                
             </DockPanel>
         </Grid>
 

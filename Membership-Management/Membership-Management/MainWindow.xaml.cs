@@ -25,6 +25,7 @@ namespace Membership_Management
 
             MainFrame.NavigationService.Navigating += NavigationService_Navigating;
             MainFrame.Navigate(new Uri("Login.xaml", UriKind.Relative));
+
         }
 
         private void NavigationService_Navigating(object sender, NavigatingCancelEventArgs e)

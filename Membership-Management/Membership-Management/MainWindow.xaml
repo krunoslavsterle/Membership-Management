@@ -5,20 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Membership_Management"
         mc:Ignorable="d"
-        Title="Membership Manager" MinHeight="800" MinWidth="1200" WindowState="Maximized">
+        SizeToContent="WidthAndHeight"
+        Title="Membership Manager" WindowState="Maximized">
     <Grid>
         <DockPanel>
             <DockPanel DockPanel.Dock="Left" x:Name="dpMenu" HorizontalAlignment="Left" Background="#2e353e">
-                <Button x:Name="btnHome" DockPanel.Dock="Top" Height="60" Width="60" Click="BtnHome_Click" Background="Transparent" BorderThickness="0 0 0 1">
-                    <Image Height="30" Width="30" Source="pack://application:,,,/Resources/Images/home-white.png" />
+                <Button x:Name="btnHome" Padding="5" DockPanel.Dock="Top" Click="BtnHome_Click" Background="Transparent" BorderThickness="0 0 0 1">
+                    <Image Height="30" Source="pack://application:,,,/Resources/Images/home-white.png" />
                 </Button>
-                <Button x:Name="btnCustomers" DockPanel.Dock="Top" Height="60" Width="60" Click="BtnCustomers_Click" Background="Transparent" BorderThickness="0 0 0 1">
+                <Button x:Name="btnCustomers" Padding="5" DockPanel.Dock="Top" Click="BtnCustomers_Click" Background="Transparent" BorderThickness="0 0 0 1">
                     <Image Height="30" Width="30" Source="pack://application:,,,/Resources/Images/users-white.png" />
                 </Button>
-                <Button x:Name="btnSettings" DockPanel.Dock="Top" Height="60" Width="60" Click="BtnSettings_Click" Background="Transparent" BorderThickness="0 0 0 1">
+                <Button x:Name="btnSettings" Padding="5" DockPanel.Dock="Top" Click="BtnSettings_Click" Background="Transparent" BorderThickness="0 0 0 1">
                     <Image Height="30" Width="30" Source="pack://application:,,,/Resources/Images/gear.png" />
                 </Button>
-                <Button x:Name="btnLock" DockPanel.Dock="Bottom" Height="60" Width="60" VerticalAlignment="Bottom" Click="BtnLock_Click" Background="Transparent" BorderThickness="0">
+                <Button x:Name="btnLock" Padding="5" DockPanel.Dock="Bottom"  VerticalAlignment="Bottom" Click="BtnLock_Click" Background="Transparent" BorderThickness="0">
                     <Image Height="30" Width="30" Source="pack://application:,,,/Resources/Images/lock-white.png" />
                 </Button>
             </DockPanel>
