@@ -1,5 +1,7 @@
-﻿using Membership_Management.Services;
+﻿using Membership_Management.Infrastructure.Helpers;
+using Membership_Management.Services;
 using System;
+using System.Threading;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Navigation;
@@ -12,11 +14,14 @@ namespace Membership_Management
     public partial class MainWindow : Window
     {
         private DatabaseService databaseService = new DatabaseService();
+        private EmailNotificationService emailNotificationService = new EmailNotificationService();
 
         public MainWindow()
         {
             InitializeComponent();
             databaseService.ValidateDatabaseExist();
+
+            TaskHelper.RunPeriodicAsync(emailNotificationService.CheckSubscriptionsAndSendNotifications, TimeSpan.FromMinutes(5), TimeSpan.FromHours(2), CancellationToken.None);
 
             MainFrame.NavigationService.Navigating += NavigationService_Navigating;
             MainFrame.Navigate(new Uri("Login.xaml", UriKind.Relative));

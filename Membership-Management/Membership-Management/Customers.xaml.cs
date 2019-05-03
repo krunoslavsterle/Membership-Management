@@ -65,6 +65,18 @@ namespace Membership_Management
 
         private void BtnEditSave_Click(object sender, RoutedEventArgs e)
         {
+            if (string.IsNullOrEmpty(editCustomer.FirstName))
+            {
+                MessageBox.Show("First Name is mandatory", "Customer Error");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(editCustomer.LastName))
+            {
+                MessageBox.Show("Last Name is mandatory", "Customer Error");
+                return;
+            }
+
             if (customers.Count(p => p.Id == editCustomer.Id) > 0)
                 databaseService.UpdateCustomer(editCustomer);
             else

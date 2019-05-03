@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 
 namespace Membership_Management
 {
@@ -25,7 +26,11 @@ namespace Membership_Management
             tbxPortNumber.Text = smtpSettings.Port.ToString();
             tbxServerName.Text = smtpSettings.ServerName;
             tbxUsername.Text = smtpSettings.Username;
+            tbxEmailSubject.Text = smtpSettings.EmailSubject;
             tbxPassword.Password = smtpSettings.Password;
+            cbxSMTPEnabled.IsChecked = smtpSettings.Enabled;
+            rtbEmailBody.Document.Blocks.Add(new Paragraph(new Run(smtpSettings.EmailBody)));
+
             tbxMasterPassword.Password = masterPassword.Password;
             tbDatabasePath.Text = databaseService.DatabasePath;
         }
@@ -94,7 +99,10 @@ namespace Membership_Management
                     Password = tbxPassword.Password,
                     Port = Int32.Parse(tbxPortNumber.Text),
                     ServerName = tbxServerName.Text,
-                    Username = tbxUsername.Text
+                    Username = tbxUsername.Text,
+                    EmailSubject = tbxEmailSubject.Text,
+                    EmailBody = new TextRange(rtbEmailBody.Document.ContentStart, rtbEmailBody.Document.ContentEnd).Text,
+                    Enabled = cbxSMTPEnabled.IsChecked.GetValueOrDefault()
                 };
 
                 databaseService.UpdateSMTPSettings(smtpSettings);

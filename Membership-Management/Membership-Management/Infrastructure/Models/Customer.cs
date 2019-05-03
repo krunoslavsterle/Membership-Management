@@ -13,6 +13,7 @@ namespace Membership_Management.Infrastructure.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }
+        public int? EmailNofificationMonth { get; set; }
         public DateTime RegDate { get; set; }
         public DateTime ValidUntil { get; set; }
         public string Email { get; set; }

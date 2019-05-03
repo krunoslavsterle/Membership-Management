@@ -60,7 +60,7 @@ namespace Membership_Management.Services
                 RegNumber = oldCustomer.reg_broj,
                 FirstName = oldCustomer.ime.ToPascalHRCase(),
                 LastName = oldCustomer.prezime.ToPascalHRCase(),
-                Address = oldCustomer.adresa.ToPascalHRCase(),
+                Address = string.IsNullOrEmpty(oldCustomer.mjesto) ? oldCustomer.adresa.ToPascalHRCase() : $"{oldCustomer.adresa.ToPascalHRCase()}, {oldCustomer.mjesto.ToPascalHRCase()}",
                 Email = oldCustomer.mail.ToPascalHRCase(),
                 RegDate = oldCustomer.datum_registracije,
                 ValidUntil = oldCustomer.vrijeme_do
