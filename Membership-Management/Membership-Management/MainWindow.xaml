@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Membership_Management"
         mc:Ignorable="d"
-        SizeToContent="WidthAndHeight"
         Title="Membership Manager" WindowState="Maximized">
     <Grid>
         <DockPanel>

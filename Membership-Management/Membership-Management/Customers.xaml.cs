@@ -7,6 +7,12 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Drawing;
+using System.IO;
+using System.Drawing.Imaging;
+using Membership_Management.Infrastructure.Helpers;
 
 namespace Membership_Management
 {
@@ -146,6 +152,63 @@ namespace Membership_Management
             dgCustomers.ItemsSource = customers;
         }
 
+        private void BtnPrint_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                MessageBox.Show("in print");
+                var bi = new BitmapImage();
+                bi.BeginInit();
+                bi.CacheOption = BitmapCacheOption.OnLoad;
+                bi.UriSource = new Uri("Resources/Images/membership_card_template.png", UriKind.Relative);
+                bi.EndInit();
+
+                string nameTxt = $"{editCustomer.FirstName.ToUpper()} {editCustomer.LastName.ToUpper()}";
+                string dateTxt = $"{editCustomer.RegDate.Day}/{editCustomer.RegDate.Month}/{editCustomer.RegDate.Year}";
+                string numTxt = editCustomer.RegNumber.ToString();
+
+                var nameLocation = new PointF(12f, 150f);
+                var dateLocation = new PointF(12f, 170f);
+                var numLocation = new PointF(260f, 170f);
+
+                Bitmap bitmap = bi.ToBitmap();
+                bi = null;
+                using (Graphics graphics = Graphics.FromImage(bitmap))
+                {
+                    using (Font arialFont = new Font("Arial", 10, System.Drawing.FontStyle.Bold))
+                    {
+                        graphics.DrawString(nameTxt, arialFont, System.Drawing.Brushes.White, nameLocation);
+                        graphics.DrawString(dateTxt, arialFont, System.Drawing.Brushes.White, dateLocation);
+                    }
+
+                    using (Font arialFont = new Font("Arial", 12, System.Drawing.FontStyle.Bold))
+                    {
+                        graphics.DrawString(numTxt, arialFont, System.Drawing.Brushes.White, numLocation);
+                    }
+                }
+
+                var newBI = bitmap.ToBitmapImage();
+                bitmap.Dispose();
+
+                var vis = new DrawingVisual();
+                using (var dc = vis.RenderOpen())
+                {
+                    dc.DrawImage(newBI, new Rect { Width = newBI.Width, Height = newBI.Height });
+                    newBI = null;
+                }
+
+                var pdialog = new PrintDialog();
+                if (pdialog.ShowDialog() == true)
+                {
+                    pdialog.PrintVisual(vis, "My Image");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         // Methods
         //
 
@@ -200,6 +263,6 @@ namespace Membership_Management
                     gridEditCustomer.Visibility = Visibility.Visible;
                     break;
             }
-        }        
+        }
     }
 }
